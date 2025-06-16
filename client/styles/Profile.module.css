@@ -1,0 +1,180 @@
+/* Profile Page Styles */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Not Authenticated State */
+.notAuthenticated {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--background-tertiary);
+}
+
+.notAuthenticated h1 {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.notAuthenticated p {
+  color: var(--text-tertiary);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.loginBtn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: var(--blue-bg);
+  color: var(--blue-fg);
+  text-decoration: none;
+  border-radius: var(--border-radius-small);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(49, 130, 206, 0.2);
+}
+
+.loginBtn:hover {
+  background-color: var(--blue-hover-bg);
+  box-shadow: 0 4px 8px rgba(49, 130, 206, 0.3);
+}
+
+/* Profile Header */
+.profileHeader {
+  background: var(--gradient-light);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  border: 1px solid var(--background-tertiary);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.username {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.userInfo {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.email {
+  color: var(--text-tertiary);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.joinDate {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Stats Section */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--background-tertiary);
+}
+
+.stat {
+  text-align: center;
+  min-width: 80px;
+}
+
+.statNumber {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blue-fg);
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* Actions Section */
+.actions {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.newDiscussionBtn {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background-color: var(--green-bg);
+  color: var(--green-fg);
+  text-decoration: none;
+  border-radius: var(--border-radius-small);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+
+/* User Discussions Section */
+.userDiscussions {
+  margin-top: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .profileHeader {
+    padding: 1.5rem;
+  }
+
+  .username {
+    font-size: 1.875rem;
+  }
+
+  .stats {
+    gap: 2rem;
+  }
+
+  .statNumber {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    gap: 1.5rem;
+  }
+
+  .newDiscussionBtn {
+    padding: 0.75rem 1.5rem;
+  }
+}

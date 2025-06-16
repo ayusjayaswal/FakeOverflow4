@@ -1,0 +1,65 @@
+.container {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.card {
+  width: max(auto,50%);
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--background-secondary);
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.error {
+  background-color: var(--red-bg);
+  color: var(--red-fg);
+  padding: 1rem;
+  border-radius: var(--border-radius-small);
+  border: 1px solid var(--red-hover-bg);
+}
+
+.error p {
+  margin: 0;
+}
+
+.footer {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--background-border);
+}
+
+.footer p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: var(--accent-bg);
+  text-decoration: underline;
+}

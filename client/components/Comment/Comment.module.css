@@ -1,0 +1,91 @@
+.comment {
+  background: var(--background-secondary);
+  border-radius: var(--border-radius-small);
+  padding: 1rem;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.author {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.date {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.toggleBtn {
+  background: var(--background-color);
+  border: none;
+  border-radius: var(--border-radius-small);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.25rem;
+  margin-left: auto;
+}
+
+.toggleBtn:hover {
+  background-color: var(--text-tertiary);
+  color: var(--background-secondary);
+}
+
+.content {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.actionBtn {
+  background-color: var(--text-color);
+  border: none;
+  border-radius: var(--border-radius-small);
+  color: var(--background-color);
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s;
+}
+
+.actionBtn:hover {
+  color: var(--text-secondary);
+  background-color: var(--background-color);
+}
+
+.deleteBtn {
+  color: var(--red-fg);
+  background-color: var(--red-bg);
+}
+
+.deleteBtn:hover {
+  color: var(--red-hover-fg);
+  background-color: var(--red-hover-bg);
+}
+
+.replyForm {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--background-color);
+  border-radius: 6px;
+  border: 1px solid var(--background-border);
+}
+
+.replies {
+  margin-top: 1rem;
+  border-left: 2px solid var(--accent);
+}

@@ -1,0 +1,45 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-tertiary);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form {
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--background-secondary);
+}
+
+.error {
+  background-color: var(--red-bg);
+  color: var(--red-fg);
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius-small);
+  margin-bottom: 2rem;
+  border: 1px solid var(--red-hover-bg);
+}
+
+.error p {
+  margin: 0;
+  font-weight: 500;
+}

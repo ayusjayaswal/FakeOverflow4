@@ -1,0 +1,17 @@
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 1rem;
+  border: none;
+  font-style: italic;
+}
+
+.empty p {
+  margin: 0;
+  font-size: 1rem;
+}
