@@ -1,4 +1,4 @@
-# Discussion Platform
+# FakeOverflow's Fourth Rewrite
 This project is supposed to be a standard template for building three-layer architecture CRUD applications, designed to be easily adaptable and deployable. It uses FastAPI for the server, Next.js for the client, and PostgreSQL with Redis for the database layer, providing a robust foundation for discussion-based or similar web applications. Other Stacks like those in Go and Node will also be added in the future this should arrive at different branches of the project. If you find this project useful you might want to drop a star to improve the project visibility :D
 
 ## Purpose
