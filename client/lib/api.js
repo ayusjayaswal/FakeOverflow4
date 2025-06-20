@@ -1,11 +1,4 @@
-// Debug: Log the environment variable during build
-console.log('Build-time NEXT_PUBLIC_API_BASE:', process.env.NEXT_PUBLIC_API_BASE);
-
-// Fallback to localhost if undefined
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE;
-
-// Debug: Log the final API base URL
-console.log('Final API_BASE_URL:', API_BASE_URL);
 
 class ApiClient {
   constructor() {
