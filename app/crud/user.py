@@ -6,8 +6,9 @@ from app.models.comment import Comment
 from app.schemas.user import UserCreate, UserUpdate
 from app.core.security import get_password_hash, verify_password
 from typing import Optional
+from uuid import UUID
 
-def get_user(db: Session, user_id: int) -> Optional[User]:
+def get_user(db: Session, user_id: UUID) -> Optional[User]:
     return db.query(User).filter(User.id == user_id, User.is_active == True).first()
 
 def get_user_by_username(db: Session, username: str) -> Optional[User]:
@@ -34,7 +35,7 @@ def authenticate_user(db: Session, username: str, password: str) -> Optional[Use
         return None
     return user
 
-def get_user_stats(db: Session, user_id: int) -> dict:
+def get_user_stats(db: Session, user_id: UUID) -> dict:
     discussion_count = db.query(func.count(Discussion.id)).filter(
         Discussion.user_id == user_id, Discussion.is_active == True
     ).scalar()

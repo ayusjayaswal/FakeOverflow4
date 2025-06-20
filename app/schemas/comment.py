@@ -2,13 +2,14 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional, List
 from .user import User
+from uuid import UUID
 
 class CommentBase(BaseModel):
     content: str
 
 class CommentCreate(CommentBase):
-    discussion_id: int
-    parent_comment_id: Optional[int] = None
+    discussion_id: UUID
+    parent_comment_id: Optional[UUID] = None
 
 class CommentUpdate(BaseModel):
     content: Optional[str] = None
@@ -16,10 +17,10 @@ class CommentUpdate(BaseModel):
 class CommentInDB(CommentBase):
     model_config = ConfigDict(from_attributes=True)
     
-    id: int
-    user_id: int
-    discussion_id: int
-    parent_comment_id: Optional[int]
+    id: UUID
+    user_id: UUID
+    discussion_id: UUID
+    parent_comment_id: Optional[UUID]
     created_at: datetime
     updated_at: datetime
     is_active: bool

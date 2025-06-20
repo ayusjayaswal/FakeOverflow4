@@ -14,6 +14,7 @@ from app.utils.cache import (
     invalidate_discussion_cache
 )
 from typing import List, Optional
+from uuid import UUID
 
 router = APIRouter()
         
@@ -51,7 +52,7 @@ def create_new_discussion(
     return db_discussion
 
 @router.get("/{discussion_id}", response_model=Discussion)
-def read_discussion(discussion_id: int, db: Session = Depends(get_db)):
+def read_discussion(discussion_id: UUID, db: Session = Depends(get_db)):
     cache_key = get_discussion_cache_key(discussion_id)
     cached_discussion = Cache.get(cache_key)
     if cached_discussion:
@@ -66,7 +67,7 @@ def read_discussion(discussion_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{discussion_id}", response_model=Discussion)
 def update_existing_discussion(
-    discussion_id: int,
+    discussion_id: UUID,
     discussion_update: DiscussionUpdate,
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
@@ -87,7 +88,7 @@ def update_existing_discussion(
 
 @router.delete("/{discussion_id}")
 def delete_existing_discussion(
-    discussion_id: int,
+    discussion_id: UUID,
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
@@ -102,7 +103,7 @@ def delete_existing_discussion(
 
 @router.get("/user/{user_id}", response_model=List[Discussion])
 def read_user_discussions(
-    user_id: int,
+    user_id: UUID,
     skip: int = 0,
     limit: int = Query(default=20, le=100),
     db: Session = Depends(get_db)
