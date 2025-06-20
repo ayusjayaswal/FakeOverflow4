@@ -10,13 +10,14 @@ from app.schemas.comment import Comment, CommentCreate, CommentUpdate
 from app.models.user import User
 from app.utils.cache import Cache, get_comments_cache_key, invalidate_comments_cache
 from typing import List
+from uuid import UUID
 from pydantic import parse_obj_as
 
 router = APIRouter()
 
 @router.get("/discussion/{discussion_id}", response_model=List[Comment])
 def read_discussion_comments(
-    discussion_id: int,
+    discussion_id: UUID,
     tree: bool = Query(default=True, description="Return comments in tree structure"),
     skip: int = 0,
     limit: int = Query(default=50, le=200),
@@ -48,7 +49,7 @@ def create_new_comment(
     return db_comment
 
 @router.get("/{comment_id}", response_model=Comment)
-def read_comment(comment_id: int, db: Session = Depends(get_db)):
+def read_comment(comment_id: UUID, db: Session = Depends(get_db)):
     comment = get_comment(db, comment_id=comment_id)
     if comment is None:
         raise HTTPException(status_code=404, detail="Comment not found")
@@ -56,7 +57,7 @@ def read_comment(comment_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{comment_id}", response_model=Comment)
 def update_existing_comment(
-    comment_id: int,
+    comment_id: UUID,
     comment_update: CommentUpdate,
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
@@ -74,7 +75,7 @@ def update_existing_comment(
 
 @router.delete("/{comment_id}")
 def delete_existing_comment(
-    comment_id: int,
+    comment_id: UUID,
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):

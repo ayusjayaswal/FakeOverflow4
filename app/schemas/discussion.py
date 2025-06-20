@@ -2,6 +2,7 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import Optional, List
 from .user import User
+from uuid import UUID
 
 class DiscussionBase(BaseModel):
     title: str
@@ -19,8 +20,8 @@ class DiscussionUpdate(BaseModel):
 class DiscussionInDB(DiscussionBase):
     model_config = ConfigDict(from_attributes=True)
     
-    id: int
-    user_id: int
+    id: UUID
+    user_id: UUID
     created_at: datetime
     updated_at: datetime
     is_active: bool
@@ -32,7 +33,7 @@ class DiscussionWithCommentCount(Discussion):
     comment_count: int
 
 class DiscussionSearchResult(BaseModel):
-    id: int
+    id: UUID
     title: str
     content: str
     created_at: datetime

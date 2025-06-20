@@ -4,11 +4,12 @@ from app.models.discussion import Discussion
 from app.models.comment import Comment
 from app.schemas.discussion import DiscussionCreate, DiscussionUpdate
 from typing import List, Optional
+from uuid import UUID
 import logging
 
 logger = logging.getLogger(__name__)
 
-def get_discussion(db: Session, discussion_id: int) -> Optional[Discussion]:
+def get_discussion(db: Session, discussion_id: UUID) -> Optional[Discussion]:
     return db.query(Discussion).options(
         joinedload(Discussion.author)
     ).filter(
@@ -32,7 +33,7 @@ def get_discussions(db: Session, skip: int = 0, limit: int = 20, search: Optiona
         )
     return query.order_by(desc(Discussion.created_at)).offset(skip).limit(limit).all()
 
-def get_discussions_by_user(db: Session, user_id: int, skip: int = 0, limit: int = 20) -> List[Discussion]:
+def get_discussions_by_user(db: Session, user_id: UUID, skip: int = 0, limit: int = 20) -> List[Discussion]:
     return db.query(Discussion).options(
         joinedload(Discussion.author)
     ).filter(
@@ -40,7 +41,7 @@ def get_discussions_by_user(db: Session, user_id: int, skip: int = 0, limit: int
         Discussion.is_active == True
     ).order_by(desc(Discussion.created_at)).offset(skip).limit(limit).all()
 
-def create_discussion(db: Session, discussion: DiscussionCreate, user_id: int) -> Discussion:
+def create_discussion(db: Session, discussion: DiscussionCreate, user_id: UUID) -> Discussion:
     db_discussion = Discussion(
         **discussion.model_dump(),
         user_id=user_id
@@ -50,7 +51,7 @@ def create_discussion(db: Session, discussion: DiscussionCreate, user_id: int) -
     db.refresh(db_discussion)
     return db_discussion
 
-def update_discussion(db: Session, discussion_id: int, discussion_update: DiscussionUpdate, user_id: int) -> Optional[Discussion]:
+def update_discussion(db: Session, discussion_id: UUID, discussion_update: DiscussionUpdate, user_id: UUID) -> Optional[Discussion]:
     db_discussion = db.query(Discussion).filter(
         Discussion.id == discussion_id,
         Discussion.user_id == user_id,
@@ -68,7 +69,7 @@ def update_discussion(db: Session, discussion_id: int, discussion_update: Discus
     db.refresh(db_discussion)
     return db_discussion
 
-def delete_discussion(db: Session, discussion_id: int, user_id: int) -> bool:
+def delete_discussion(db: Session, discussion_id: UUID, user_id: UUID) -> bool:
     db_discussion = db.query(Discussion).filter(
         Discussion.id == discussion_id,
         Discussion.user_id == user_id,
@@ -82,7 +83,7 @@ def delete_discussion(db: Session, discussion_id: int, user_id: int) -> bool:
     db.commit()
     return True
 
-def get_discussion_comment_count(db: Session, discussion_id: int) -> int:
+def get_discussion_comment_count(db: Session, discussion_id: UUID) -> int:
     return db.query(func.count(Comment.id)).filter(
         Comment.discussion_id == discussion_id,
         Comment.is_active == True

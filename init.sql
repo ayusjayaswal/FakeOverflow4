@@ -1,7 +1,8 @@
 create extension if not exists pg_trgm;
 create extension if not exists btree_gin;
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 create table if not exists users (
-    id serial primary key,
+    id UUID primary key default gen_random_uuid(),
     username varchar(50) unique not null,
     email varchar(100) unique not null,
     password_hash varchar(255) not null,
@@ -10,21 +11,21 @@ create table if not exists users (
     is_active boolean default true
 );
 create table if not exists discussions (
-    id serial primary key,
+    id UUID primary key default gen_random_uuid(),
     title varchar(255) not null,
     content text not null,
     tags text[] default '{}',
-    user_id integer not null references users(id) on delete cascade,
+    user_id UUID not null references users(id) on delete cascade,
     created_at timestamp with time zone default now(),
     updated_at timestamp with time zone default now(),
     is_active boolean default true
 );
 create table if not exists comments (
-    id serial primary key,
+    id UUID primary key default gen_random_uuid(),
     content text not null,
-    user_id integer not null references users(id) on delete cascade,
-    discussion_id integer not null references discussions(id) on delete cascade,
-    parent_comment_id integer references comments(id) on delete cascade,
+    user_id UUID not null references users(id) on delete cascade,
+    discussion_id UUID not null references discussions(id) on delete cascade,
+    parent_comment_id UUID references comments(id) on delete cascade,
     created_at timestamp with time zone default now(),
     updated_at timestamp with time zone default now(),
     is_active boolean default true

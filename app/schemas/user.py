@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
 from datetime import datetime
 from typing import Optional, List
+from uuid import UUID
 
 class UserBase(BaseModel):
     username: str
@@ -15,7 +16,7 @@ class UserUpdate(BaseModel):
 
 class UserInDB(UserBase):
     model_config = ConfigDict(from_attributes=True)
-    id: int
+    id: UUID
     created_at: datetime
     updated_at: datetime
     is_active: bool

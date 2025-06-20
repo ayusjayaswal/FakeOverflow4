@@ -6,6 +6,7 @@ from app.crud.user import get_user, get_user_stats
 from app.schemas.user import User, UserWithStats
 from app.utils.cache import Cache, get_user_cache_key
 from typing import List
+from uuid import UUID
 
 router = APIRouter()
 
@@ -26,7 +27,7 @@ def read_users_me(current_user: User = Depends(get_current_active_user), db: Ses
 
 
 @router.get("/{user_id}", response_model=UserWithStats)
-def read_user(user_id: int, db: Session = Depends(get_db)):
+def read_user(user_id: UUID, db: Session = Depends(get_db)):
     cache_key = get_user_cache_key(user_id)
     cached_user = Cache.get(cache_key)
     if cached_user:

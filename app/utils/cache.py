@@ -3,6 +3,7 @@ import json
 import pickle
 from typing import Any, Optional
 from app.core.config import settings
+from uuid import UUID
 
 redis_client = redis.from_url(settings.REDIS_URL, decode_responses=False)
 
@@ -64,28 +65,28 @@ def get_discussions_cache_key(skip: int, limit: int, search: Optional[str] = Non
     return f"discussions_{skip}_{limit}{search_part}"
 
 
-def get_discussion_cache_key(discussion_id: int) -> str:
+def get_discussion_cache_key(discussion_id: UUID) -> str:
     return f"discussion_{discussion_id}"
 
 
-def get_comments_cache_key(discussion_id: int) -> str:
+def get_comments_cache_key(discussion_id: UUID) -> str:
     return f"comments_discussion_{discussion_id}"
 
 
-def get_user_cache_key(user_id: int) -> str:
+def get_user_cache_key(user_id: UUID) -> str:
     return f"user_{user_id}"
 
 
 # Cache invalidation helpers
-def invalidate_discussion_cache(discussion_id: int):
+def invalidate_discussion_cache(discussion_id: UUID):
     Cache.delete(get_discussion_cache_key(discussion_id))
     Cache.delete(get_comments_cache_key(discussion_id))
     Cache.delete_pattern("discussions_*")
 
 
-def invalidate_user_cache(user_id: int):
+def invalidate_user_cache(user_id: UUID):
     Cache.delete(get_user_cache_key(user_id))
 
 
-def invalidate_comments_cache(discussion_id: int):
+def invalidate_comments_cache(discussion_id: UUID):
     Cache.delete(get_comments_cache_key(discussion_id))
