@@ -1,6 +1,6 @@
 create extension if not exists pg_trgm;
 create extension if not exists btree_gin;
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+create extension if not exists pgcrypto;
 create table if not exists users (
     id UUID primary key default gen_random_uuid(),
     username varchar(50) unique not null,

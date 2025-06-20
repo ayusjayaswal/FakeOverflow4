@@ -54,7 +54,7 @@ export default function DiscussionDetail() {
       setCommentLoading(true);
       await apiClient.createComment({
         ...commentData,
-        discussion_id: parseInt(id),
+        discussion_id: id,
       });
       await loadComments();
     } catch (error) {
