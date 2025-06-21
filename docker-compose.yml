@@ -11,7 +11,7 @@ services:
       - ACCESS_TOKEN_EXPIRE_MINUTES=30
       - API_V1_STR=/api/v1
       - PROJECT_NAME=FakeOverflow3
-      - BACKEND_CORS_ORIGINS=["http://localhost:3000","http://localhost:8001","https://ayushjayaswal.xyz"]
+      - BACKEND_CORS_ORIGINS=["http://localhost:3000","http://localhost:8001"]
       - DEFAULT_PAGE_SIZE=20
       - MAX_PAGE_SIZE=100
       - CACHE_EXPIRE_SECONDS=300
@@ -31,8 +31,7 @@ services:
     ports:
       - "8001:3000"
     environment:
-      - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_API_BASE=http://localhost:8000
     volumes:
       - ./client:/app
       - /app/node_modules

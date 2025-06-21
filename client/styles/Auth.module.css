@@ -9,7 +9,7 @@
 .card {
   width: max(auto,50%);
   background-color: var(--background-color);
-  padding: 2rem;
+  padding: 2rem 5rem;
   border-radius: var(--border-radius);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--background-secondary);

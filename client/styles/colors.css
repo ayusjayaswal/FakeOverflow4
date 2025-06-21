@@ -14,6 +14,9 @@
   --accent-bg: #d45b22;
   --accent-fg: #ffceb7;
 
+  --accent-input-bg: #cdeac050;
+  --accent-input-fg: #3a4237;
+
   --red: #f12a23;
   --red-bg: #f88784;
   --red-fg: #801c1c;
@@ -39,11 +42,11 @@
 :root[data-theme="dark"] {
   --wallpaper: linear-gradient(to right, #200122, #6f0000);
 
-  --background-color: #282828;
-  --background-secondary: #332f2c;
+  --background-color: #292929;
+  --background-secondary: #282828;
   --background-border: #665c54;
 
-  --text-color: #ebdbb2;
+  --text-color: #efe9ae;
   --text-secondary: #d5c4a1;
   --text-tertiary: #bdae93;
 
@@ -51,6 +54,9 @@
   --accent-color: #f4976c;
   --accent-bg: #e97e4d;
   --accent-fg: #180a04;
+
+  --accent-input-bg: #cdeac02d;
+  --accent-input-fg: #cdeac0;
 
   --inactive-bg: #bea7a7;
   --inactive-fg: #131010;
