@@ -1,11 +1,9 @@
--- Insert users
 INSERT INTO users (id, username, email, password_hash) VALUES
 ('550e8400-e29b-41d4-a716-446655440001', 'Oggy', 'oggy@example.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/lewf4RKzjPVnJxn4W'),
 ('550e8400-e29b-41d4-a716-446655440002', 'Shinchan', 'shinchan@example.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/lewf4RKzjPVnJxn4W'),
 ('550e8400-e29b-41d4-a716-446655440003', 'Nobita', 'nobita@example.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/lewf4RKzjPVnJxn4W'),
 ('550e8400-e29b-41d4-a716-446655440004', 'Jack', 'jack@example.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/lewf4RKzjPVnJxn4W');
 
--- Insert discussions
 INSERT INTO discussions (id, title, content, tags, user_id, created_at) VALUES
 ('660e8400-e29b-41d4-a716-446655440001', 'What are the best pizza toppings?', 
 'I''ve been thinking about this for ages. I personally love pepperoni and mushrooms, but my friend says pineapple is the way to go. What do you all think? Are there any unconventional toppings that actually taste amazing?',
