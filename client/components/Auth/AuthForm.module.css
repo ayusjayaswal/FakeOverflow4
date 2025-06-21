@@ -23,7 +23,8 @@
   border: 1px solid var(--background-secondary);
   border-radius: var(--border-radius);
   font-size: 1rem;
-  color: var(--text-color);
+  color: var(--accent-input-fg);
+  background-color: var(--accent-input-bg);
 }
 
 .input:focus {
@@ -34,7 +35,7 @@
 
 .submitBtn {
   padding: 0.4rem;
-  background-color: var(--accent);
+  background-color: var(--accent-bg);
   color: var(--accent-fg);
   border: none;
   border-radius: var(--border-radius-small);
@@ -45,7 +46,7 @@
 
 .submitBtn:hover:not(:disabled) {
   background-color: var(--accent-fg);
-  color: var(--accent);
+  color: var(--accent-bg);
 }
 
 .submitBtn:disabled {

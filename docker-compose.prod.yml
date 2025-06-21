@@ -1,17 +1,19 @@
 services:
   server:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
     ports:
       - "8000:8000"
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/discussion_db
       - REDIS_URL=redis://redis:6379
-      - SECRET_KEY=your-very-secret-key-change-this-in-production
+      - SECRET_KEY=[REDACTED]
       - ALGORITHM=HS256
       - ACCESS_TOKEN_EXPIRE_MINUTES=30
       - API_V1_STR=/api/v1
       - PROJECT_NAME=FakeOverflow3
-      - BACKEND_CORS_ORIGINS=["http://localhost:3000","http://localhost:8001"]
+      - BACKEND_CORS_ORIGINS=["https://ayushjayaswal.xyz"]
       - DEFAULT_PAGE_SIZE=20
       - MAX_PAGE_SIZE=100
       - CACHE_EXPIRE_SECONDS=300
@@ -20,60 +22,60 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    volumes:
-      - ./app:/app/app
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
 
   client:
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
+      args:
+        - NEXT_PUBLIC_API_BASE=https://ayushjayaswal.xyz
     ports:
       - "8001:3000"
-    environment:
-      - NEXT_PUBLIC_API_BASE=http://localhost:8000
-    volumes:
-      - ./client:/app
-      - /app/node_modules
-      - /app/.next
-    command: npm run dev
-    depends_on:
-      - server
+    restart: unless-stopped
+
   db:
     image: postgres:15
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=[REDACTED]
+      - POSTGRES_PASSWORD=[REDACTED]
       - POSTGRES_DB=discussion_db
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./0_init.sql:/docker-entrypoint-initdb.d/0_init.sql
       - ./1_dummy.sql:/docker-entrypoint-initdb.d/1_dummy.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
+
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     volumes:
       - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
+      interval: 10s
       timeout: 3s
       retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
   adminer:
     image: adminer
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     depends_on:
       db:
         condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   redis_data:

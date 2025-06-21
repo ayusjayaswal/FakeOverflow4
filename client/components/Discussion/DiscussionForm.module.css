@@ -23,8 +23,8 @@
 .input,
 .textarea {
   padding: 0.75rem;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--accent-input-bg);
+  color: var(--accent-input-fg);
   border: 1px solid var(--background-border);
   border-radius: var(--border-radius-small);
   font-size: 1rem;

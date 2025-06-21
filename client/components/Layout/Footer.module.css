@@ -1,6 +1,6 @@
 .footer {
-  background-color: var(--background-tertiary);
-  color: var(--text-tertiary);
+  background-color: var(--background-secondary);
+  color: var(--accent-input-fg);
   padding: 1.5rem 0;
 }
 
