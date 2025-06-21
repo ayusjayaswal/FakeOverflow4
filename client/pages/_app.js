@@ -9,7 +9,6 @@ export default function App({ Component, pageProps }) {
     <AuthProvider>
       <Head>
         <link rel="icon" href="/logo.png" />
-        <title>Your Site Title</title> {/* optional */}
       </Head>
       <Layout>
         <Component {...pageProps} />
