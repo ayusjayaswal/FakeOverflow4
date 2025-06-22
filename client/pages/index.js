@@ -43,13 +43,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>torikai</title>
+        <title>tangerines</title>
         <meta name="description" content="Join the conversation on our discussion platform" />
       </Head>
 
       <div className={styles.container}>
         <div className={styles.hero}>
-          <h1 className={styles.title}>Welcome to torikai</h1>
+          <h1 className={styles.title}>Welcome to tangerines</h1>
           <p className={styles.subtitle}>
             a place for fake opinions of fake people...
           </p>

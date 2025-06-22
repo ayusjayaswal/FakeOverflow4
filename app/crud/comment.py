@@ -7,7 +7,6 @@ from uuid import UUID
 
 def get_comment(db: Session, comment_id: UUID) -> Optional[Comment]:
     return db.query(Comment).options(
-        joinedload(Comment.author)
     ).filter(
         Comment.id == comment_id,
         Comment.is_active == True
