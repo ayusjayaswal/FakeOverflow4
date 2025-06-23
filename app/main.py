@@ -9,7 +9,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version="3.0.1",
-    description="FakeOverflow3 API Service",
+    description="Tangerines API Service",
 )
 
 app.add_middleware(
@@ -28,7 +28,7 @@ app.include_router(search.router, prefix=f"{settings.API_V1_STR}/search", tags=[
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to Fakeoverflow3 API, You'r not supposed to use this!!"}
+    return {"message": "Welcome to Tangerines API, You'r not supposed to use this!!"}
 
 @app.get("/health")
 def health_check():

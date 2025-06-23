@@ -10,7 +10,7 @@ services:
       - ALGORITHM=HS256
       - ACCESS_TOKEN_EXPIRE_MINUTES=30
       - API_V1_STR=/api/v1
-      - PROJECT_NAME=FakeOverflow3
+      - PROJECT_NAME=Tangerines
       - BACKEND_CORS_ORIGINS=["http://localhost:3000","http://localhost:8001"]
       - DEFAULT_PAGE_SIZE=20
       - MAX_PAGE_SIZE=100
