@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/discussion_db
+      - DATABASE_URL=postgresql://[POSTGRESS_USER_HERE]:[POSTGRES_PASSWORD_HERE]@db:5432/discussion_db
       - REDIS_URL=redis://redis:6379
       - SECRET_KEY=[REDACTED]
       - ALGORITHM=HS256
@@ -47,7 +47,7 @@ services:
       - ./0_init.sql:/docker-entrypoint-initdb.d/0_init.sql
       - ./1_dummy.sql:/docker-entrypoint-initdb.d/1_dummy.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U [POSTGRES_USER] -d discussion_db"]
       interval: 10s
       timeout: 5s
       retries: 5
