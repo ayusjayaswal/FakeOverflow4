@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "Starting FakeOverflow production deployment..."
+echo "Starting  production deployment..."
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -45,7 +45,7 @@ if docker-compose -f docker-compose.prod.yml ps | grep -q "Up"; then
 
     echo ""
     print_status "   Your application should be available at:"
-    print_status "   Frontend: https://ayushjayaswal.xyz/fakeoverflow/"
+    print_status "   Frontend: https://ayushjayaswal.xyz/tangerines/"
     print_status "   API: https://ayushjayaswal.xyz/api/"
     echo ""
 
