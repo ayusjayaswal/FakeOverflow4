@@ -4,7 +4,7 @@ const nextConfig = {
   basePath: '/fakeoverflow',
   assetPrefix: '/fakeoverflow',
   trailingSlash: true,
-  output: 'standalone',
+  //output: 'standalone',
 }
 
 module.exports = nextConfig

@@ -8,7 +8,8 @@ export default function App({ Component, pageProps }) {
   return (
     <AuthProvider>
       <Head>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <Layout>
         <Component {...pageProps} />
