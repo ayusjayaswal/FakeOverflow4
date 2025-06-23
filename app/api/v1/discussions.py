@@ -29,7 +29,7 @@ def read_discussions(
     cached_discussions = Cache.get(cache_key)
     if cached_discussions:
         return cached_discussions
-    discussions = get_discussions(db, skip=skip, limit=limit, search=search)
+    discussions = get_discussions(db, skip, limit, search)
     discussions_with_counts = []
     for discussion in discussions:
         comment_count = get_discussion_comment_count(db, discussion.id)
@@ -47,7 +47,7 @@ def create_new_discussion(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    db_discussion = create_discussion(db=db, discussion=discussion, user_id=current_user.id)
+    db_discussion = create_discussion(db, discussion, current_user.id)
     Cache.delete_pattern("discussions_*")
     return db_discussion
 
@@ -58,7 +58,7 @@ def read_discussion(discussion_id: UUID, db: Session = Depends(get_db)):
     if cached_discussion:
         return cached_discussion
     
-    discussion = get_discussion(db, discussion_id=discussion_id)
+    discussion = get_discussion(db, discussion_id)
     if discussion is None:
         raise HTTPException(status_code=404, detail="Discussion not found")
     
@@ -72,18 +72,11 @@ def update_existing_discussion(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    discussion = update_discussion(
-        db=db,
-        discussion_id=discussion_id,
-        discussion_update=discussion_update,
-        user_id=current_user.id
-    )
+    discussion = update_discussion( db, discussion_id, discussion_update, current_user.id)
     if discussion is None:
         raise HTTPException(status_code=404, detail="Discussion not found or not owned by user")
     
-    # Invalidate cache
     invalidate_discussion_cache(discussion_id)
-    
     return discussion
 
 @router.delete("/{discussion_id}")
@@ -92,13 +85,11 @@ def delete_existing_discussion(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    """Delete a discussion"""
-    success = delete_discussion(db=db, discussion_id=discussion_id, user_id=current_user.id)
+    success = delete_discussion(db, discussion_id, current_user.id)
     if not success:
         raise HTTPException(status_code=404, detail="Discussion not found or not owned by user")
     
     invalidate_discussion_cache(discussion_id)
-    
     return {"message": "Discussion deleted successfully"}
 
 @router.get("/user/{user_id}", response_model=List[Discussion])
@@ -108,4 +99,4 @@ def read_user_discussions(
     limit: int = Query(default=20, le=100),
     db: Session = Depends(get_db)
 ):
-    return get_discussions_by_user(db, user_id=user_id, skip=skip, limit=limit)
+    return get_discussions_by_user(db, user_id, skip, limit)

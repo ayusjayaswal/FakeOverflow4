@@ -82,7 +82,6 @@
   padding: 1rem;
   background: var(--background-color);
   border-radius: 6px;
-  border: 1px solid var(--background-border);
 }
 
 .replies {

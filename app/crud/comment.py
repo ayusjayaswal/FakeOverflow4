@@ -6,8 +6,7 @@ from typing import List, Optional
 from uuid import UUID
 
 def get_comment(db: Session, comment_id: UUID) -> Optional[Comment]:
-    return db.query(Comment).options(
-    ).filter(
+    return db.query(Comment).filter(
         Comment.id == comment_id,
         Comment.is_active == True
     ).first()
@@ -62,14 +61,23 @@ def update_comment(db: Session, comment_id: UUID, comment_update: CommentUpdate,
     return db_comment
 
 def delete_comment(db: Session, comment_id: UUID, user_id: UUID) -> bool:
-    db_comment = db.query(Comment).filter(
+    comment = db.query(Comment).filter(Comment.id == comment_id).first()
+    if not comment:
+        raise HTTPException(status_code=404, detail="Comment not found")
+    db.delete(comment)
+    db.commit()
+    return {"message": "Comment permanently deleted"}
+
+def get_comment(db: Session, comment_id: UUID) -> Optional[Comment]:
+    if isinstance(comment_id, str):
+        comment_id = UUID(comment_id)
+    all_comment = db.query(Comment).filter(Comment.id == comment_id).first()
+    print(f"Comment exists (any status): {all_comment is not None}")
+    if all_comment:
+        print(f"Comment is_active: {all_comment.is_active}")
+    active_comment = db.query(Comment).filter(
         Comment.id == comment_id,
-        Comment.user_id == user_id,
         Comment.is_active == True
     ).first()
-    if not db_comment:
-        return False
     
-    db_comment.is_active = False
-    db.commit()
-    return True
+    return active_comment
