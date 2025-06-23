@@ -60,7 +60,7 @@ export default function SearchBox({ onResults, onLoading }) {
           onChange={handleInputChange}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          placeholder="search for active toiwas..."
+          placeholder="search for an active tangerine..."
           className={styles.searchInput}
         />
         

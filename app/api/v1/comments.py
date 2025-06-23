@@ -50,7 +50,7 @@ def create_new_comment(
 
 @router.get("/{comment_id}", response_model=Comment)
 def read_comment(comment_id: UUID, db: Session = Depends(get_db)):
-    comment = get_comment(db, comment_id=comment_id)
+    comment = get_comment(db, comment_id)
     if comment is None:
         raise HTTPException(status_code=404, detail="Comment not found")
     return comment
@@ -62,12 +62,7 @@ def update_existing_comment(
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ):
-    comment = update_comment(
-        db=db,
-        comment_id=comment_id,
-        comment_update=comment_update,
-        user_id=current_user.id
-    )
+    comment = update_comment( db, comment_id, comment_update, current_user.id)
     if comment is None:
         raise HTTPException(status_code=404, detail="Comment not found or not owned by user")
     invalidate_comments_cache(comment.discussion_id)
@@ -83,7 +78,7 @@ def delete_existing_comment(
     if not comment:
         raise HTTPException(status_code=404, detail="Comment not found")
     
-    success = delete_comment(db=db, comment_id=comment_id, user_id=current_user.id)
+    success = delete_comment(db, comment_id, current_user.id)
     if not success:
         raise HTTPException(status_code=404, detail="Comment not found or not owned by user")
     invalidate_comments_cache(comment.discussion_id)
