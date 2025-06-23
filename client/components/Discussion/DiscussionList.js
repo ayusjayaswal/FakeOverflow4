@@ -14,7 +14,7 @@ export default function DiscussionList({ discussions, loading }) {
   if (!discussions || discussions.length === 0) {
     return (
       <div className={styles.empty}>
-        <p>No active toiwas found.</p>
+        <p>No active tangerines found.</p>
       </div>
     );
   }
