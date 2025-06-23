@@ -1,10 +1,15 @@
+// next.prod.config.js
+const basePath = '/tangerines';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  basePath: '/fakeoverflow',
-  assetPrefix: '/fakeoverflow',
+  basePath,
+  assetPrefix: basePath,
   trailingSlash: true,
-  //output: 'standalone',
-}
+  publicRuntimeConfig: {
+    basePath,
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
